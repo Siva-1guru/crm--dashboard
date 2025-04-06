@@ -1,0 +1,113 @@
+Dashboard Container
+.dashboard-container {
+  background-color: #f3f4f6;
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+ 
+}
+ 
+.dashboard-box {
+  width: 23%; /* Allocate space for 4 containers in a row with gap */
+  min-width: 250px; /* Minimum width to prevent shrinking too much */
+  height: 150px; /* Set consistent height */
+  background-color: white;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Utility Classes */
+.bg-blue-500 { 
+  background-color: #b2bec3;
+  margin-left: 30px;
+  /* padding-left:10px; */
+  width: 400px;
+  margin-right: 20px;
+  
+
+  }
+.bg-green-500 { 
+   background-color: #b2bec3;
+   width: 400px;
+   margin-right: 20px;
+   display: flex;
+}
+.bg-yellow-500 { 
+  background-color: #b2bec3;
+   width: 400px;
+   margin-right: 20px;
+  }
+
+.bg-red-500 { background-color: #b2bec3;
+   width: 400px;
+   margin-right: 20px;
+   }
+   .dashboard-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+  /* Responsive Design */
+@media (max-width: 1024px) {
+  .dashboard-box {
+    width: 48%; /* 2 per row on tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-box {
+    width: 100%; /* 1 per row on small screens */
+  }
+}
+  
+/* Header Styles */
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+p {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+/* Chart Container */
+.chart-container {
+  margin-top: 3rem;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+margin: 0;
+padding: 0;
+
+
+}
+.mt-12{
+  background-color: #636e72;
+  padding-left: 50px;
+  width: 1800px;
+  height: 1100px;
+  margin-left: 32px;  
+  border-radius: 10px;
+}
+.hii{
+  /* background-color: #ef4444; */
+  margin-left: 100px;
+}
