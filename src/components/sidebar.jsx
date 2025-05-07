@@ -1,453 +1,332 @@
  
-// import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import { List, ListItemButton, ListItemText, IconButton } from '@mui/material';
-// import { Menu, X } from 'lucide-react';
-// import './Sidebar.css';
+// // // import React, { useState } from 'react';
+// // // import { Link } from 'react-router-dom';
 
+// // // import {
+// // //   Drawer,
+// // //   List,
+// // //   ListItemButton,
+// // //   ListItemText,
+// // //   IconButton,
+// // //   Typography,
+// // //   Box,
+// // //   AppBar,
+// // //   Toolbar,
+// // //   CssBaseline,
+// // //   Divider,
+// // //   useTheme,
+// // //   useMediaQuery,
+// // //   Button,
+// // // } from '@mui/material';
+// // // import MenuIcon from '@mui/icons-material/Menu';
+// // // import CloseIcon from '@mui/icons-material/Close';
 
-// const Sidebar = () => {
-//   const [isOpen, setIsOpen] = useState(false);
+// // // const drawerWidth = 240;
 
-//   const toggleSidebar = () => setIsOpen(!isOpen);
- 
-//   const modules = [
-//     { name: 'Dashboard', path: '/dashboard' },
-//     { name: 'Profile', path: '/profile' },
-//     { name: 'Leads', path: '/leads' },
-//     { name: 'Contacts', path: '/contacts' },
-//     { name: 'Accounts', path: '/accounts' },
-//     { name: 'Reports', path: '/reports' },
-//     { name: 'Sales', path: '/sales' },
-//     { name: 'Tasks', path: '/tasks' },
-//     { name: 'Deals', path: '/deals' },
-//     { name: 'Meetings', path: '/meetings' },
-//     { name: 'Calls', path: '/calls' },
-//     { name: 'Products', path: '/products' },
-//     { name: 'Quotes', path: '/quotes' },
-//     { name: 'Invoices', path: '/invoices' },
-//     { name: 'Documents', path: '/documents' },
-//     { name: 'Forecasting', path: '/forecasting' },
-//     { name: 'Companies', path: '/companies' },
-//     { name: 'Vendors', path: '/vendors' },
-//     { name: 'Sales Order', path: '/sales-order' },
-//     { name: 'Purchase Order', path: '/purchase-order' },
-//     { name: 'Sales Inbox', path: '/sales-inbox' },
-//     { name: 'Price Books', path: '/price-books' },
-//     { name: 'Cases', path: '/cases' },
-//     { name: 'Solutions', path: '/solutions' },
-//     { name: 'Visits', path: '/visits' },
-//     { name: 'Social', path: '/social' },
-//     { name: 'Service', path: '/service' },
-//     { name: 'Project', path: '/project' },
-//   ];
+// // // const modules = [
+// // //   { name: 'Dashboard', path: '/dashboard' },
+// // //   { name: 'Profile', path: '/profile' },
+// // //   { name: 'Leads', path: '/leads' },
+// // //   { name: 'Contacts', path: '/contacts' },
+// // //   // { name: 'Accounts', path: '/accounts' },
+// // //   { name: 'Reports', path: '/reports' },
+// // //   { name: 'Sales', path: '/sales' },
+// // //   { name: 'Tasks', path: '/tasks' },
+// // //   { name: 'Deals', path: '/deals' },
+// // //   { name: 'Meetings', path: '/meetings' },
+// // //   { name: 'Calls', path: '/calls' },
+// // //   { name: 'Products', path: '/products' },
+// // //   { name: 'Quotes', path: '/quotes' },
+// // //   { name: 'Invoices', path: '/invoices' },
+// // //   { name: 'Documents', path: '/documents' },
+// // //   { name: 'Forecasting', path: '/forecasting' },
+// // //   { name: 'Companies', path: '/companies' },
+// // //   { name: 'Vendors', path: '/vendors' },
+// // //   { name: 'Sales Order', path: '/sales-order' },
+// // //   { name: 'Purchase Order', path: '/purchase-order' },
+// // //   { name: 'Sales Inbox', path: '/sales-inbox' },
+// // //   { name: 'Price Books', path: '/price-books' },
+// // //   { name: 'Cases', path: '/cases' },
+// // //   { name: 'Solutions', path: '/solutions' },
+// // //   { name: 'Visits', path: '/visits' },
+// // //   { name: 'Social', path: '/social' },
+// // //   { name: 'Service', path: '/service' },
+// // //   { name: 'Project', path: '/project' },
+// // // ];
 
-//   return (
-//     <div className="flex h-screen">
-//       {/* Menu Button for Mobile */}
-      
-// <IconButton className="sm:hidden" onClick={toggleSidebar}>
-//         {isOpen ? <X size={24} /> : <Menu size={24} />}
-//       </IconButton>
-//       {/* Sidebar */}
-//       {isOpen && (
-//         <div className="w-64 h-full bg-gray-800 text-white p-5 fixed">
-//           <h3 className="sidebar-title text-xl font-bold mb-6">MODULES</h3>
-//           <List>
-//             {modules.map((module, index) => (
-//               <ListItemButton key={index} component={Link} to={module.path} onClick={toggleSidebar}>
-//                 <ListItemText primary={module.name} />
-//               </ListItemButton>
-//             ))}
-//           </List>
-//         </div>
-//       )}
+// // // const Sidebar = () => {
+// // //   const [mobileOpen, setMobileOpen] = useState(false);
+// // //   const theme = useTheme();
+// // //   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-//       {/* Main Content Centered */}
-//       <div className="flex-1 flex items-center justify-center p-5">
-//         {/* <h2 className="text-4xl font-bold">Welcome to CRM Dashboard</h2> */}
-//       </div>
-//     </div>
-//   );
-// };
+// // //   const handleDrawerToggle = () => {
+// // //     setMobileOpen(!mobileOpen);
+// // //   };
 
-// // export default Sidebar;
-// import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import {
-//   Drawer,
-//   List,
-//   ListItemButton,
-//   ListItemText,
-//   IconButton,
-//   Typography,
-//   Box,
-//   AppBar,
-//   Toolbar
-// } from '@mui/material';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import CloseIcon from '@mui/icons-material/Close';
+// // //   const drawer = (
+// // //     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+// // //       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+// // //         <Typography variant="h6" noWrap>
+// // //           CRM Modules
+// // //         </Typography>
+// // //         {isMobile && (
+// // //           <IconButton onClick={handleDrawerToggle}>
+// // //             <CloseIcon />
+// // //           </IconButton>
+// // //         )}
+// // //       </Toolbar>
+// // //       <Divider />
+// // //       <Box sx={{ flexGrow: 1, overflowY: 'auto', px: 2 }}>
+// // //         <List>
+// // //           {modules.map((module, index) => (
+// // //             <ListItemButton
+// // //               key={index}
+// // //               component={Link}
+// // //               to={module.path}
+// // //               onClick={handleDrawerToggle}
+// // //               sx={{
+// // //                 justifyContent: 'center',
+// // //                 '&:hover': { bgcolor: 'grey.800' },
+// // //               }}
+// // //             >
+// // //               <ListItemText
+// // //                 primary={module.name}
+// // //                 primaryTypographyProps={{
+// // //                   align: 'center',
+// // //                   sx: { width: '100%' },
+// // //                 }}
+// // //               />
+// // //             </ListItemButton>
+// // //           ))}
+// // //         </List>
+// // //       </Box>
+// // //     </Box>
+// // //   );
 
-// const modules = [
-//   { name: 'Dashboard', path: '/dashboard' },
-//   { name: 'Profile', path: '/profile' },
-//   { name: 'Leads', path: '/leads' },
-//   { name: 'Contacts', path: '/contacts' },
-//   { name: 'Accounts', path: '/accounts' },
-//   { name: 'Reports', path: '/reports' },
-//   { name: 'Sales', path: '/sales' },
-//   { name: 'Tasks', path: '/tasks' },
-//   { name: 'Deals', path: '/deals' },
-//   { name: 'Meetings', path: '/meetings' },
-//   { name: 'Calls', path: '/calls' },
-//   { name: 'Products', path: '/products' },
-//   { name: 'Quotes', path: '/quotes' },
-//   { name: 'Invoices', path: '/invoices' },
-//   { name: 'Documents', path: '/documents' },
-//   { name: 'Forecasting', path: '/forecasting' },
-//   { name: 'Companies', path: '/companies' },
-//   { name: 'Vendors', path: '/vendors' },
-//   { name: 'Sales Order', path: '/sales-order' },
-//   { name: 'Purchase Order', path: '/purchase-order' },
-//   { name: 'Sales Inbox', path: '/sales-inbox' },
-//   { name: 'Price Books', path: '/price-books' },
-//   { name: 'Cases', path: '/cases' },
-//   { name: 'Solutions', path: '/solutions' },
-//   { name: 'Visits', path: '/visits' },
-//   { name: 'Social', path: '/social' },
-//   { name: 'Service', path: '/service' },
-//   { name: 'Project', path: '/project' },
-// ];
+// // //   return (
+// // //     <Box sx={{ display: 'flex' }}>
+// // //       <CssBaseline />
+// // //       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+// // //         <Toolbar>
+// // //           <IconButton
+// // //             color="inherit"
+// // //             aria-label="open drawer"
+// // //             edge="start"
+// // //             onClick={handleDrawerToggle}
+// // //             sx={{ mr: 2 }}
+// // //           >
+// // //             <MenuIcon />
+// // //           </IconButton>
+// // //           <Typography variant="h6" noWrap>
+// // //             CRM Dashboard
+// // //           </Typography>
+// // //           <Button>Logout</Button>
+// // //         </Toolbar>
+        
+// // //       </AppBar>
 
-// const Sidebar = () => {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const toggleDrawer = () => setIsOpen(!isOpen);
+// // //       <Drawer
+// // //         variant="temporary"
+// // //         open={mobileOpen}
+// // //         onClose={handleDrawerToggle}
+// // //         ModalProps={{ keepMounted: true }}
+// // //         sx={{
+// // //           display: { xs: 'block', sm: 'block' },
+// // //           '& .MuiDrawer-paper': {
+// // //             width: isMobile ? '100%' : drawerWidth,
+// // //             maxWidth: '100%',
+// // //           },
+// // //         }}
+// // //       >
+// // //         {drawer}
+// // //       </Drawer>
 
-//   return (
-//     <>
-//       {/* Top AppBar for Mobile Menu */}
-//       <AppBar position="static" sx={{ display: { sm: 'none' } }}>
-//         <Toolbar>
-//           <IconButton color="inherit" edge="start" onClick={toggleDrawer}>
-//             <MenuIcon />
-//           </IconButton>
-//           <Typography variant="h6" sx={{ ml: 2 }}>
-//             CRM Modules
-//           </Typography>
-//         </Toolbar>
-//       </AppBar>
+// // //       <Box
+// // //         component="main"
+// // //         sx={{
+// // //           flexGrow: 1,
+// // //           p: 3,
+// // //           width: { sm: `calc(100% - ${drawerWidth}px)` },
+// // //         }}
+// // //       >
+// // //         <Toolbar />
+// // //         {/* Your routed content goes here */}
+// // //       </Box>
+// // //     </Box>
+// // //   );
+// // // };
 
-//       {/* Permanent Drawer for Desktop */}
-//       <Box sx={{ display: { xs: 'none', sm: 'block' }, width: 240, height: '100vh', bgcolor: 'grey.900', color: 'white', position: 'fixed' }}>
-//         <Box sx={{ p: 3 }}>
-//           <Typography variant="h6" fontWeight="bold" gutterBottom>
-//             MODULES
-//           </Typography>
-//           <List>
-//             {modules.map((module, index) => (
-//               <ListItemButton
-//                 key={index}
-//                 component={Link}
-//                 to={module.path}
-//                 sx={{ color: 'white', '&:hover': { bgcolor: 'grey.800' } }}
-//               >
-//                 <ListItemText primary={module.name} />
-//               </ListItemButton>
-//             ))}
-//           </List>
-//         </Box>
-//       </Box>
+// // // export default Sidebar;
+// // import React, { useState } from 'react';
+// // import { Link } from 'react-router-dom';
 
-//       {/* Drawer for Mobile */}
-//       <Drawer anchor="left" open={isOpen} onClose={toggleDrawer}>
-//         <Box sx={{ width: 250 }}>
-//           <Box display="flex" alignItems="center" justifyContent="space-between" p={2}>
-//             <Typography variant="h6">Modules</Typography>
-//             <IconButton onClick={toggleDrawer}>
-//               <CloseIcon />
-//             </IconButton>
-//           </Box>
-//           <List>
-//             {modules.map((module, index) => (
-//               <ListItemButton key={index} component={Link} to={module.path} onClick={toggleDrawer}>
-//                 <ListItemText primary={module.name} />
-//               </ListItemButton>
-//             ))}
-//           </List>
-//         </Box>
-//       </Drawer>
+// // import {
+// //   Drawer,
+// //   List,
+// //   ListItemButton,
+// //   ListItemText,
+// //   IconButton,
+// //   Typography,
+// //   Box,
+// //   AppBar,
+// //   Toolbar,
+// //   CssBaseline,
+// //   Divider,
+// //   useTheme,
+// //   useMediaQuery,
+// //   Button,
+// // } from '@mui/material';
+// // import MenuIcon from '@mui/icons-material/Menu';
+// // import CloseIcon from '@mui/icons-material/Close';
+// // import LogoutIcon from '@mui/icons-material/Logout'; // Imported Logout icon
 
-//       {/* Main Content Placeholder */}
-//       <Box sx={{ ml: { sm: '240px' }, p: 3 }}>
-//         <Typography variant="h4" fontWeight="bold">
-//           Welcome to CRM Dashboard
-//         </Typography>
-//       </Box>
-//     </>
-//   );
-// };
+// // const drawerWidth = 240;
 
-// // export default Sidebar;
-// import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import {
-//   Drawer,
-//   List,
-//   ListItemButton,
-//   ListItemText,
-//   IconButton,
-//   Typography,
-//   Box,
-//   AppBar,
-//   Toolbar
-// } from '@mui/material';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import CloseIcon from '@mui/icons-material/Close';
+// // const modules = [
+// //   { name: 'Dashboard', path: '/dashboard' },
+// //   { name: 'Profile', path: '/profile' },
+// //   { name: 'Leads', path: '/leads' },
+// //   { name: 'Contacts', path: '/contacts' },
+// //   // { name: 'Accounts', path: '/accounts' },
+// //   { name: 'Reports', path: '/reports' },
+// //   { name: 'Sales', path: '/sales' },
+// //   { name: 'Tasks', path: '/tasks' },
+// //   { name: 'Deals', path: '/deals' },
+// //   { name: 'Meetings', path: '/meetings' },
+// //   { name: 'Calls', path: '/calls' },
+// //   { name: 'Products', path: '/products' },
+// //   { name: 'Quotes', path: '/quotes' },
+// //   { name: 'Invoices', path: '/invoices' },
+// //   { name: 'Documents', path: '/documents' },
+// //   { name: 'Forecasting', path: '/forecasting' },
+// //   { name: 'Companies', path: '/companies' },
+// //   { name: 'Vendors', path: '/vendors' },
+// //   { name: 'Sales Order', path: '/sales-order' },
+// //   { name: 'Purchase Order', path: '/purchase-order' },
+// //   { name: 'Sales Inbox', path: '/sales-inbox' },
+// //   { name: 'Price Books', path: '/price-books' },
+// //   { name: 'Cases', path: '/cases' },
+// //   { name: 'Solutions', path: '/solutions' },
+// //   { name: 'Visits', path: '/visits' },
+// //   { name: 'Social', path: '/social' },
+// //   { name: 'Service', path: '/service' },
+// //   { name: 'Project', path: '/project' },
+// // ];
 
-// const drawerWidth = 180; // Slimmer sidebar
+// // const Sidebar = () => {
+// //   const [mobileOpen, setMobileOpen] = useState(false);
+// //   const theme = useTheme();
+// //   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-// const modules = [
-//   { name: 'Dashboard', path: '/dashboard' },
-//   { name: 'Profile', path: '/profile' },
-//   { name: 'Leads', path: '/leads' },
-//   { name: 'Contacts', path: '/contacts' },
-//   { name: 'Accounts', path: '/accounts' },
-//   { name: 'Reports', path: '/reports' },
-//   { name: 'Sales', path: '/sales' },
-//   { name: 'Tasks', path: '/tasks' },
-//   { name: 'Deals', path: '/deals' },
-//   { name: 'Meetings', path: '/meetings' },
-//   { name: 'Calls', path: '/calls' },
-//   { name: 'Products', path: '/products' },
-//   { name: 'Quotes', path: '/quotes' },
-//   { name: 'Invoices', path: '/invoices' },
-//   { name: 'Documents', path: '/documents' },
-//   { name: 'Forecasting', path: '/forecasting' },
-//   { name: 'Companies', path: '/companies' },
-//   { name: 'Vendors', path: '/vendors' },
-//   { name: 'Sales Order', path: '/sales-order' },
-//   { name: 'Purchase Order', path: '/purchase-order' },
-//   { name: 'Sales Inbox', path: '/sales-inbox' },
-//   { name: 'Price Books', path: '/price-books' },
-//   { name: 'Cases', path: '/cases' },
-//   { name: 'Solutions', path: '/solutions' },
-//   { name: 'Visits', path: '/visits' },
-//   { name: 'Social', path: '/social' },
-//   { name: 'Service', path: '/service' },
-//   { name: 'Project', path: '/project' },
-// ];
+// //   const handleDrawerToggle = () => {
+// //     setMobileOpen(!mobileOpen);
+// //   };
 
-// const Sidebar = () => {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const toggleDrawer = () => setIsOpen(!isOpen);
+// //   const drawer = (
+// //     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+// //       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+// //         <Typography variant="h6" noWrap>
+// //           CRM Modules
+// //         </Typography>
+// //         {isMobile && (
+// //           <IconButton onClick={handleDrawerToggle}>
+// //             <CloseIcon />
+// //           </IconButton>
+// //         )}
+// //       </Toolbar>
+// //       <Divider />
+// //       <Box sx={{ flexGrow: 1, overflowY: 'auto', px: 2 }}>
+// //         <List>
+// //           {modules.map((module, index) => (
+// //             <ListItemButton
+// //               key={index}
+// //               component={Link}
+// //               to={module.path}
+// //               onClick={handleDrawerToggle}
+// //               sx={{
+// //                 justifyContent: 'center',
+// //                 '&:hover': { bgcolor: 'grey.800' },
+// //               }}
+// //             >
+// //               <ListItemText
+// //                 primary={module.name}
+// //                 primaryTypographyProps={{
+// //                   align: 'center',
+// //                   sx: { width: '100%' },
+// //                 }}
+// //               />
+// //             </ListItemButton>
+// //           ))}
+// //         </List>
+// //       </Box>
+// //     </Box>
+// //   );
 
-//   return (
-//     <>
-//       {/* Top AppBar for Mobile Menu */}
-//       <AppBar position="static" sx={{ display: { sm: 'none' } }}>
-//         <Toolbar>
-//           <IconButton color="inherit" edge="start" onClick={toggleDrawer}>
-//             <MenuIcon />
-//           </IconButton>
-//           <Typography variant="h6" sx={{ ml: 2 }}>
-//             CRM Modules
-//           </Typography>
-//         </Toolbar>
-//       </AppBar>
+// //   return (
+// //     <Box sx={{ display: 'flex' }}>
+// //       <CssBaseline />
+// //       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+// //         <Toolbar>
+// //           <IconButton
+// //             color="inherit"
+// //             aria-label="open drawer"
+// //             edge="start"
+// //             onClick={handleDrawerToggle}
+// //             sx={{ mr: 2 }}
+// //           >
+// //             <MenuIcon />
+// //           </IconButton>
+// //           <Typography variant="h6" noWrap>
+// //             CRM Dashboard
+// //           </Typography>
+// //           {/* Spacer to push logout to the right */}
+// //           <Box sx={{ flexGrow: 1 }} />
+// //           <Button
+// //             color="inherit"
+// //             startIcon={<LogoutIcon />}
+// //             variant="outlined"
+// //             onClick={handleL}
+// //           >
+// //             Logout
+// //           </Button>
+// //         </Toolbar>
+// //       </AppBar>
 
-//       {/* Permanent Drawer for Desktop */}
-//       <Box
-//         sx={{
-//           display: { xs: 'none', sm: 'block' },
-//           width: drawerWidth,
-//           height: '100vh',
-//           bgcolor: 'grey.900',
-//           color: 'white',
-//           position: 'fixed'
-//         }}
-//       >
-//         <Box sx={{ p: 2 }}>
-//           <Typography variant="h6" fontWeight="bold" gutterBottom>
-//             MODULES
-//           </Typography>
-//           <List>
-//             {modules.map((module, index) => (
-//               <ListItemButton
-//                 key={index}
-//                 component={Link}
-//                 to={module.path}
-//                 sx={{ color: 'white', '&:hover': { bgcolor: 'grey.800' } }}
-//               >
-//                 <ListItemText primary={module.name} />
-//               </ListItemButton>
-//             ))}
-//           </List>
-//         </Box>
-//       </Box>
+// //       <Drawer
+// //         variant="temporary"
+// //         open={mobileOpen}
+// //         onClose={handleDrawerToggle}
+// //         ModalProps={{ keepMounted: true }}
+// //         sx={{
+// //           display: { xs: 'block', sm: 'block' },
+// //           '& .MuiDrawer-paper': {
+// //             width: isMobile ? '100%' : drawerWidth,
+// //             maxWidth: '100%',
+// //           },
+// //         }}
+// //       >
+// //         {drawer}
+// //       </Drawer>
 
-//       {/* Drawer for Mobile */}
-//       <Drawer anchor="left" open={isOpen} onClose={toggleDrawer}>
-//         <Box sx={{ width: 250 }}>
-//           <Box display="flex" alignItems="center" justifyContent="space-between" p={2}>
-//             <Typography variant="h6">Modules</Typography>
-//             <IconButton onClick={toggleDrawer}>
-//               <CloseIcon />
-//             </IconButton>
-//           </Box>
-//           <List>
-//             {modules.map((module, index) => (
-//               <ListItemButton key={index} component={Link} to={module.path} onClick={toggleDrawer}>
-//                 <ListItemText primary={module.name} />
-//               </ListItemButton>
-//             ))}
-//           </List>
-//         </Box>
-//       </Drawer>
-
-//       {/* Main Content Placeholder */}
-//       <Box sx={{ ml: { sm: `${drawerWidth}px` }, p: 3 }}>
-//         <Typography variant="h4" fontWeight="bold">
-//           Welcome to CRM Dashboard
-//         </Typography>
-//       </Box>
-//     </>
-//   );
-// };
-
-// // export default Sidebar;
-// import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import {
-//   Drawer,
-//   List,
-//   ListItemButton,
-//   ListItemText,
-//   IconButton,
-//   Typography,
-//   Box,
-//   AppBar,
-//   Toolbar
-// } from '@mui/material';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import CloseIcon from '@mui/icons-material/Close';
-
-// const drawerWidth = 180; // Slimmer sidebar
-
-// const modules = [
-//   { name: 'Dashboard', path: '/dashboard' },
-//   { name: 'Profile', path: '/profile' },
-//   { name: 'Leads', path: '/leads' },
-//   { name: 'Contacts', path: '/contacts' },
-//   { name: 'Accounts', path: '/accounts' },
-//   { name: 'Reports', path: '/reports' },
-//   { name: 'Sales', path: '/sales' },
-//   { name: 'Tasks', path: '/tasks' },
-//   { name: 'Deals', path: '/deals' },
-//   { name: 'Meetings', path: '/meetings' },
-//   { name: 'Calls', path: '/calls' },
-//   { name: 'Products', path: '/products' },
-//   { name: 'Quotes', path: '/quotes' },
-//   { name: 'Invoices', path: '/invoices' },
-//   { name: 'Documents', path: '/documents' },
-//   { name: 'Forecasting', path: '/forecasting' },
-//   { name: 'Companies', path: '/companies' },
-//   { name: 'Vendors', path: '/vendors' },
-//   { name: 'Sales Order', path: '/sales-order' },
-//   { name: 'Purchase Order', path: '/purchase-order' },
-//   { name: 'Sales Inbox', path: '/sales-inbox' },
-//   { name: 'Price Books', path: '/price-books' },
-//   { name: 'Cases', path: '/cases' },
-//   { name: 'Solutions', path: '/solutions' },
-//   { name: 'Visits', path: '/visits' },
-//   { name: 'Social', path: '/social' },
-//   { name: 'Service', path: '/service' },
-//   { name: 'Project', path: '/project' },
-// ];
-
-// const Sidebar = () => {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const toggleDrawer = () => setIsOpen(!isOpen);
-
-//   return (
-//     <>
-//       {/* Top AppBar for Mobile Menu */}
-//       <AppBar position="static" sx={{ display: { sm: 'none' } }}>
-//         <Toolbar>
-//           <IconButton color="inherit" edge="start" onClick={toggleDrawer}>
-//             <MenuIcon />
-//           </IconButton>
-//           <Typography variant="h6" sx={{ ml: 2 }}>
-//             CRM Modules
-//           </Typography>
-//         </Toolbar>
-//       </AppBar>
-
-//       {/* Permanent Drawer for Desktop */}
-//       <Box
-//         sx={{
-//           display: { xs: 'none', sm: 'block' },
-//           width: drawerWidth,
-//           height: '100vh',
-//           bgcolor: 'grey.900',
-//           color: 'white',
-//           position: 'fixed',
-//           overflowY: 'auto', // ✅ Enables vertical scrolling
-//           scrollbarWidth: 'thin', // ✅ Makes scrollbar slim (for Firefox)
-//           '&::-webkit-scrollbar': { width: '6px' }, // ✅ Scrollbar width (for Chrome)
-//           '&::-webkit-scrollbar-thumb': { background: 'grey', borderRadius: '10px' }, // ✅ Scrollbar styling
-//         }}
-//       >
-//         <Box sx={{ p: 2 }}>
-//           <Typography variant="h6" fontWeight="bold" gutterBottom>
-//             MODULES
-//           </Typography>
-//           <List>
-//             {modules.map((module, index) => (
-//               <ListItemButton
-//                 key={index}
-//                 component={Link}
-//                 to={module.path}
-//                 sx={{ color: 'white', '&:hover': { bgcolor: 'grey.800' } }}
-//               >
-//                 <ListItemText primary={module.name} />
-//               </ListItemButton>
-//             ))}
-//           </List>
-//         </Box>
-//       </Box>
-
-//       {/* Drawer for Mobile */}
-//       <Drawer anchor="left" open={isOpen} onClose={toggleDrawer}>
-//         <Box sx={{ width: 250 }}>
-//           <Box display="flex" alignItems="center" justifyContent="space-between" p={2}>
-//             <Typography variant="h6">Modules</Typography>
-//             <IconButton onClick={toggleDrawer}>
-//               <CloseIcon />
-//             </IconButton>
-//           </Box>
-//           <List>
-//             {modules.map((module, index) => (
-//               <ListItemButton key={index} component={Link} to={module.path} onClick={toggleDrawer}>
-//                 <ListItemText primary={module.name} />
-//               </ListItemButton>
-//             ))}
-//           </List>
-//         </Box>
-//       </Drawer>
-
-//       {/* Main Content Placeholder */}
-//       <Box sx={{ ml: { sm: `${drawerWidth}px` }, p: 3 }}>
-//         <Typography variant="h4" fontWeight="bold">
-//           Welcome to CRM Dashboard
-//         </Typography>
-//       </Box>
-//     </>
-//   );
-// };
+// //       <Box
+// //         component="main"
+// //         sx={{
+// //           flexGrow: 1,
+// //           p: 3,
+// //           width: { sm: `calc(100% - ${drawerWidth}px)` },
+// //         }}
+// //       >
+// //         <Toolbar />
+// //         {/* Your routed content goes here */}
+// //       </Box>
+// //     </Box>
+// //   );
+// // };
 
 // // export default Sidebar;
 // import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
+// import { Link, useNavigate } from 'react-router-dom';
+
 // import {
 //   Drawer,
 //   List,
@@ -459,9 +338,14 @@
 //   AppBar,
 //   Toolbar,
 //   CssBaseline,
+//   Divider,
+//   useTheme,
+//   useMediaQuery,
+//   Button,
 // } from '@mui/material';
 // import MenuIcon from '@mui/icons-material/Menu';
 // import CloseIcon from '@mui/icons-material/Close';
+// import LogoutIcon from '@mui/icons-material/Logout';
 
 // const drawerWidth = 240;
 
@@ -470,7 +354,7 @@
 //   { name: 'Profile', path: '/profile' },
 //   { name: 'Leads', path: '/leads' },
 //   { name: 'Contacts', path: '/contacts' },
-//   { name: 'Accounts', path: '/accounts' },
+//   // { name: 'Accounts', path: '/accounts' },
 //   { name: 'Reports', path: '/reports' },
 //   { name: 'Sales', path: '/sales' },
 //   { name: 'Tasks', path: '/tasks' },
@@ -498,189 +382,66 @@
 
 // const Sidebar = () => {
 //   const [mobileOpen, setMobileOpen] = useState(false);
+//   const theme = useTheme();
+//   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+//   const navigate = useNavigate();
 
+//   // Toggle Drawer for mobile view
 //   const handleDrawerToggle = () => {
 //     setMobileOpen(!mobileOpen);
 //   };
 
+//   // Logout handler: clear tokens and navigate to login page
+//   const handleLogout = () => {
+//     // Clear any tokens or user data from local storage
+//     localStorage.removeItem('authToken');
+//     // Redirect to the login page (adjust the path as needed)
+//     navigate('/');
+//   };
+
 //   const drawer = (
-//     <div>
-//       <Toolbar>
+//     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+//       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
 //         <Typography variant="h6" noWrap>
 //           CRM Modules
 //         </Typography>
-//       </Toolbar>
-//       <List>
-//         {modules.map((module, index) => (
-//           <ListItemButton
-//             key={index}
-//             component={Link}
-//             to={module.path}
-//             sx={{ '&:hover': { bgcolor: 'grey.800' } }}
-//             onClick={handleDrawerToggle}
-//           >
-//             <ListItemText primary={module.name} />
-//           </ListItemButton>
-//         ))}
-//       </List>
-//     </div>
-//   );
-
-//   return (
-//     <Box sx={{ display: 'flex' }}>
-//       <CssBaseline />
-//       {/* AppBar */}
-//       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-//         <Toolbar>
-//           <IconButton
-//             color="inherit"
-//             aria-label="open drawer"
-//             edge="start"
-//             onClick={handleDrawerToggle}
-//             sx={{ display: { sm: 'none' } }}
-//           >
-//             <MenuIcon />
+//         {isMobile && (
+//           <IconButton onClick={handleDrawerToggle}>
+//             <CloseIcon />
 //           </IconButton>
-//           <Typography variant="h6" noWrap>
-//             CRM Dashboard
-//           </Typography>
-//         </Toolbar>
-//       </AppBar>
-//       {/* Permanent Drawer for Desktop */}
-//       <Drawer
-//         variant="permanent"
-//         sx={{
-//           display: { xs: 'none', sm: 'block' },
-//           width: drawerWidth,
-//           flexShrink: 0,
-//           '& .MuiDrawer-paper': {
-//             width: drawerWidth,
-//             boxSizing: 'border-box',
-//           },
-//         }}
-//         open
-//       >
-//         {drawer}
-//       </Drawer>
-//       {/* Temporary Drawer for Mobile */}
-//       <Drawer
-//         variant="temporary"
-//         open={mobileOpen}
-//         onClose={handleDrawerToggle}
-//         ModalProps={{
-//           keepMounted: true,
-//         }}
-//         sx={{
-//           display: { xs: 'block', sm: 'none' },
-//           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-//         }}
-//       >
-//         {drawer}
-//       </Drawer>
-//       {/* Main Content */}
-//       <Box
-//         component="main"
-//         sx={{
-//           flexGrow: 1,
-//           p: 3,
-//           width: { sm: `calc(100% - ${drawerWidth}px)` },
-//           ml: { sm: `${drawerWidth}px` },
-//         }}
-//       >
-//         <Toolbar />
-//         <Typography variant="h4" fontWeight="bold">
-//           Welcome to CRM Dashboard
-//         </Typography>
-//         {/* உங்கள் முக்கிய உள்ளடக்கம் இங்கே வரும் */}
+//         )}
+//       </Toolbar>
+//       <Divider />
+//       <Box sx={{ flexGrow: 1, overflowY: 'auto', px: 2 }}>
+//         <List>
+//           {modules.map((module, index) => (
+//             <ListItemButton
+//               key={index}
+//               component={Link}
+//               to={module.path}
+//               onClick={handleDrawerToggle}
+//               sx={{
+//                 justifyContent: 'center',
+//                 '&:hover': { bgcolor: 'grey.800' },
+//               }}
+//             >
+//               <ListItemText
+//                 primary={module.name}
+//                 primaryTypographyProps={{
+//                   align: 'center',
+//                   sx: { width: '100%' },
+//                 }}
+//               />
+//             </ListItemButton>
+//           ))}
+//         </List>
 //       </Box>
 //     </Box>
 //   );
-// };
-
-// // export default Sidebar;
-// import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import {
-//   Drawer,
-//   List,
-//   ListItemButton,
-//   ListItemText,
-//   IconButton,
-//   Typography,
-//   Box,
-//   AppBar,
-//   Toolbar,
-//   CssBaseline,
-// } from '@mui/material';
-// import MenuIcon from '@mui/icons-material/Menu';
-
-// const drawerWidth = 240;
-
-// const modules = [
-//   { name: 'Dashboard', path: '/dashboard' },
-//   { name: 'Profile', path: '/profile' },
-//   { name: 'Leads', path: '/leads' },
-//   { name: 'Contacts', path: '/contacts' },
-//   { name: 'Accounts', path: '/accounts' },
-//   { name: 'Reports', path: '/reports' },
-//   { name: 'Sales', path: '/sales' },
-//   { name: 'Tasks', path: '/tasks' },
-//   { name: 'Deals', path: '/deals' },
-//   { name: 'Meetings', path: '/meetings' },
-//   { name: 'Calls', path: '/calls' },
-//   { name: 'Products', path: '/products' },
-//   { name: 'Quotes', path: '/quotes' },
-//   { name: 'Invoices', path: '/invoices' },
-//   { name: 'Documents', path: '/documents' },
-//   { name: 'Forecasting', path: '/forecasting' },
-//   { name: 'Companies', path: '/companies' },
-//   { name: 'Vendors', path: '/vendors' },
-//   { name: 'Sales Order', path: '/sales-order' },
-//   { name: 'Purchase Order', path: '/purchase-order' },
-//   { name: 'Sales Inbox', path: '/sales-inbox' },
-//   { name: 'Price Books', path: '/price-books' },
-//   { name: 'Cases', path: '/cases' },
-//   { name: 'Solutions', path: '/solutions' },
-//   { name: 'Visits', path: '/visits' },
-//   { name: 'Social', path: '/social' },
-//   { name: 'Service', path: '/service' },
-//   { name: 'Project', path: '/project' },
-// ];
-
-// const Sidebar = () => {
-//   const [mobileOpen, setMobileOpen] = useState(false);
-
-//   const handleDrawerToggle = () => {
-//     setMobileOpen(!mobileOpen);
-//   };
-
-//   const drawer = (
-//     <div>
-//       <Toolbar>
-//         <Typography variant="h6" noWrap>
-//           CRM Modules
-//         </Typography>
-//       </Toolbar>
-//       <List>
-//         {modules.map((module, index) => (
-//           <ListItemButton
-//             key={index}
-//             component={Link}
-//             to={module.path}
-//             sx={{ '&:hover': { bgcolor: 'grey.800' } }}
-//             onClick={handleDrawerToggle}
-//           >
-//             <ListItemText primary={module.name} />
-//           </ListItemButton>
-//         ))}
-//       </List>
-//     </div>
-//   );
 
 //   return (
 //     <Box sx={{ display: 'flex' }}>
 //       <CssBaseline />
-//       {/* AppBar */}
 //       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
 //         <Toolbar>
 //           <IconButton
@@ -688,57 +449,52 @@
 //             aria-label="open drawer"
 //             edge="start"
 //             onClick={handleDrawerToggle}
-//             sx={{ display: { sm: 'none' } }}
+//             sx={{ mr: 2 }}
 //           >
 //             <MenuIcon />
 //           </IconButton>
 //           <Typography variant="h6" noWrap>
 //             CRM Dashboard
 //           </Typography>
+//           {/* Spacer to push logout to the right */}
+//           <Box sx={{ flexGrow: 1 }} />
+//           <Button
+//             color="inherit"
+//             startIcon={<LogoutIcon />}
+//             onClick={handleLogout}
+//             variant="outlined"
+//           >
+//             Logout
+//           </Button>
 //         </Toolbar>
 //       </AppBar>
-//       {/* Permanent Drawer for Desktop */}
-//       <Drawer
-//         variant="permanent"
-//         sx={{
-//           display: { xs: 'none', sm: 'block' },
-//           width: drawerWidth,
-//           flexShrink: 0,
-//           '& .MuiDrawer-paper': {
-//             width: drawerWidth,
-//             boxSizing: 'border-box',
-//           },
-//         }}
-//         open
-//       >
-//         {drawer}
-//       </Drawer>
-//       {/* Temporary Drawer for Mobile */}
+
 //       <Drawer
 //         variant="temporary"
 //         open={mobileOpen}
 //         onClose={handleDrawerToggle}
-//         ModalProps={{
-//           keepMounted: true,
-//         }}
+//         ModalProps={{ keepMounted: true }}
 //         sx={{
-//           display: { xs: 'block', sm: 'none' },
-//           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+//           display: { xs: 'block', sm: 'block' },
+//           '& .MuiDrawer-paper': {
+//             width: isMobile ? '100%' : drawerWidth,
+//             maxWidth: '100%',
+//           },
 //         }}
 //       >
 //         {drawer}
 //       </Drawer>
-//       {/* Main Content */}
+
 //       <Box
 //         component="main"
 //         sx={{
 //           flexGrow: 1,
 //           p: 3,
 //           width: { sm: `calc(100% - ${drawerWidth}px)` },
-//           ml: { sm: `${drawerWidth}px` },
 //         }}
 //       >
 //         <Toolbar />
+//         {/* Your routed content goes here */}
 //       </Box>
 //     </Box>
 //   );
@@ -746,7 +502,7 @@
 
 // export default Sidebar;
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Drawer,
   List,
@@ -758,76 +514,132 @@ import {
   AppBar,
   Toolbar,
   CssBaseline,
+  Divider,
+  useTheme,
+  useMediaQuery,
+  Button,
+  ListItemIcon,
 } from '@mui/material';
+
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import LogoutIcon from '@mui/icons-material/Logout';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PersonIcon from '@mui/icons-material/Person';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import ContactsIcon from '@mui/icons-material/Contacts';
+import ReportIcon from '@mui/icons-material/Assessment';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import TaskIcon from '@mui/icons-material/Task';
+import WorkIcon from '@mui/icons-material/Work';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import PhoneIcon from '@mui/icons-material/Phone';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import DescriptionIcon from '@mui/icons-material/Description';
+import ForecastIcon from '@mui/icons-material/BarChart';
+import BusinessIcon from '@mui/icons-material/Business';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import InboxIcon from '@mui/icons-material/Inbox';
+import BookIcon from '@mui/icons-material/Book';
+import BugReportIcon from '@mui/icons-material/BugReport';
+import HelpIcon from '@mui/icons-material/Help';
+import PlaceIcon from '@mui/icons-material/Place';
+import ShareIcon from '@mui/icons-material/Share';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+// import ReminderForm from '../pages/RemainderForm';
+import ReminderIcon from '@mui/icons-material/NotificationsActive'; // use any icon you prefer
+
 
 const drawerWidth = 240;
 
 const modules = [
-  { name: 'Dashboard', path: '/dashboard' },
-  { name: 'Profile', path: '/profile' },
-  { name: 'Leads', path: '/leads' },
-  { name: 'Contacts', path: '/contacts' },
-  { name: 'Accounts', path: '/accounts' },
-  { name: 'Reports', path: '/reports' },
-  { name: 'Sales', path: '/sales' },
-  { name: 'Tasks', path: '/tasks' },
-  { name: 'Deals', path: '/deals' },
-  { name: 'Meetings', path: '/meetings' },
-  { name: 'Calls', path: '/calls' },
-  { name: 'Products', path: '/products' },
-  { name: 'Quotes', path: '/quotes' },
-  { name: 'Invoices', path: '/invoices' },
-  { name: 'Documents', path: '/documents' },
-  { name: 'Forecasting', path: '/forecasting' },
-  { name: 'Companies', path: '/companies' },
-  { name: 'Vendors', path: '/vendors' },
-  { name: 'Sales Order', path: '/sales-order' },
-  { name: 'Purchase Order', path: '/purchase-order' },
-  { name: 'Sales Inbox', path: '/sales-inbox' },
-  { name: 'Price Books', path: '/price-books' },
-  { name: 'Cases', path: '/cases' },
-  { name: 'Solutions', path: '/solutions' },
-  { name: 'Visits', path: '/visits' },
-  { name: 'Social', path: '/social' },
-  { name: 'Service', path: '/service' },
-  { name: 'Project', path: '/project' },
+  { name: 'Dashboard', path: '/dashboard', icon: <DashboardIcon /> },
+  { name: 'Profile', path: '/profile', icon: <PersonIcon /> },
+  { name: 'Leads', path: '/leads', icon: <LeaderboardIcon /> },
+  { name: 'Contacts', path: '/contacts', icon: <ContactsIcon /> },
+  { name: 'Reports', path: '/reports', icon: <ReportIcon /> },
+  { name: 'Sales', path: '/sales', icon: <ShoppingCartIcon /> },
+  { name: 'Tasks', path: '/tasks', icon: <TaskIcon /> },
+  { name: 'Deals', path: '/deals', icon: <WorkIcon /> },
+  { name: 'Meetings', path: '/meetings', icon: <CalendarTodayIcon /> },
+  { name: 'Calls', path: '/calls', icon: <PhoneIcon /> },
+  { name: 'Products', path: '/product', icon: <InventoryIcon /> },
+  // { name: 'Quotes', path: '/quotes', icon: <DescriptionIcon /> },
+  // { name: 'Invoices', path: '/invoices', icon: <DescriptionIcon /> },
+  { name: 'Documents', path: '/documents', icon: <DescriptionIcon /> },
+  // { name: 'Forecasting', path: '/forecasting', icon: <ForecastIcon /> },
+  // { name: 'Companies', path: '/companies', icon: <BusinessIcon /> },
+  // { name: 'Vendors', path: '/vendors', icon: <LocalShippingIcon /> },
+  // { name: 'Sales Order', path: '/sales-order', icon: <ShoppingCartIcon /> },
+  // { name: 'Purchase Order', path: '/purchase-order', icon: <ShoppingCartIcon /> },
+  // { name: 'Sales Inbox', path: '/sales-inbox', icon: <InboxIcon /> },
+  // { name: 'Price Books', path: '/price-books', icon: <BookIcon /> },
+  // { name: 'Cases', path: '/cases', icon: <BugReportIcon /> },
+  // { name: 'Solutions', path: '/solutions', icon: <HelpIcon /> },
+  // { name: 'Visits', path: '/visits', icon: <PlaceIcon /> },
+  // { name: 'Social', path: '/social', icon: <ShareIcon /> },
+  // { name: 'Service', path: '/service', icon: <SupportAgentIcon /> },
+  { name: 'Project', path: '/project', icon: <AssignmentIcon /> },
+  // { name: 'Project', path: '/project', icon: <AssignmentIcon /> },
+  // { name: 'Reminders', path: '/reminders', icon: <ReminderIcon /> },
+  // { name: 'RemainderForm', path: '/reminder/:leadId', icon: <AssignmentIcon /> },
 ];
 
 const Sidebar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    navigate('/');
+  };
+
   const drawer = (
-    <div>
-      <Toolbar>
+    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant="h6" noWrap>
           CRM Modules
         </Typography>
+        {isMobile && (
+          <IconButton onClick={handleDrawerToggle}>
+            <CloseIcon />
+          </IconButton>
+        )}
       </Toolbar>
-      <List>
-        {modules.map((module, index) => (
-          <ListItemButton
-            key={index}
-            component={Link}
-            to={module.path}
-            sx={{ '&:hover': { bgcolor: 'grey.800' } }}
-            onClick={handleDrawerToggle}
-          >
-            <ListItemText primary={module.name} />
-          </ListItemButton>
-        ))}
-      </List>
-    </div>
+      <Divider />
+      <Box sx={{ flexGrow: 1, overflowY: 'auto', px: 2 }}>
+        <List>
+          {modules.map((module, index) => (
+            <ListItemButton
+              key={index}
+              component={Link}
+              to={module.path}
+              onClick={handleDrawerToggle}
+              sx={{
+                '&:hover': { bgcolor: 'grey.800' },
+              }}
+            >
+              <ListItemIcon sx={{ color: 'inherit', minWidth: 36 }}>
+                {module.icon}
+              </ListItemIcon>
+              <ListItemText primary={module.name} />
+            </ListItemButton>
+          ))}
+        </List>
+      </Box>
+    </Box>
   );
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      {/* AppBar */}
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
           <IconButton
@@ -835,61 +647,51 @@ const Sidebar = () => {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2 }} // Menu icon always visible
+            sx={{ mr: 2 }}
           >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
             CRM Dashboard
           </Typography>
+          <Box sx={{ flexGrow: 1 }} />
+          <Button
+            color="inherit"
+            startIcon={<LogoutIcon />}
+            onClick={handleLogout}
+            variant="outlined"
+          >
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
 
-      {/* Permanent Drawer for Desktop */}
-      {/* <Drawer
-        variant="permanent"
-        sx={{
-          display: { xs: 'none', sm: 'block' },
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        open
-      >
-        {drawer}
-      </Drawer> */}
-
-      {/* Temporary Drawer for All Screens (can be toggled) */}
       <Drawer
         variant="temporary"
         open={mobileOpen}
         onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true,
-        }}
+        ModalProps={{ keepMounted: true }}
         sx={{
-          display: { xs: 'block', sm: 'block' }, // Allow toggle on all screen sizes
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          display: { xs: 'block', sm: 'block' },
+          '& .MuiDrawer-paper': {
+            width: isMobile ? '100%' : drawerWidth,
+            maxWidth: '100%',
+          },
         }}
       >
         {drawer}
       </Drawer>
 
-      {/* Main Content */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
         }}
       >
         <Toolbar />
-        {/* Your routed pages will render here */}
+        {/* Your routed content goes here */}
       </Box>
     </Box>
   );

@@ -1,5 +1,8 @@
  
    /* Full-page centering */
+   body{
+    /* background-color: #b61967; */
+   }
  .login-container {
     display: flex;
     justify-content: center;

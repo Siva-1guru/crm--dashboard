@@ -1,33 +1,233 @@
-// // import { useState } from "react";
-// // import { useForm } from "react-hook-form";
-// // import { Card, CardContent } from "../components/ui/card";
-// // import { Button } from "../components/ui/button";
-// // import { Input } from "../components/ui/input";
-// // import { Label } from "../components/ui/label";
-// // import ProfileAvatar from "../components/ProfileAvatar";
-// // import { toast } from "react-hot-toast";
-// // import styles from "../style/Profile.module.css";  // Adjust the path accordingly
+ 
+// // // import { useState, useEffect } from "react";
+// // // import { useForm, Controller } from "react-hook-form";
+// // // import {
+// // //   Card,
+// // //   CardContent,
+// // //   Typography,
+// // //   TextField,
+// // //   Button,
+// // //   Avatar,
+// // //   Grid,
+// // //   Box,
+// // // } from "@mui/material";
+// // // import { toast } from "react-hot-toast";
 
-// // // Reusable Input component
-// // const FormInput = ({ id, label, type = "text", register, errors, disabled }) => (
-// //   <div>
-// //     <Label htmlFor={id}>{label}</Label>
-// //     <Input
-// //       id={id}
-// //       type={type}
-// //       {...register(id, { required: `${label} is required` })}
-// //       className={`w-full p-2 border ${errors[id] ? "border-red-500" : "border-gray-300"} rounded-md`}
-// //       disabled={disabled}
-// //     />
-// //     {errors[id] && (
-// //       <p className="text-red-500 text-sm mt-1">{errors[id]?.message}</p>
-// //     )}
-// //   </div>
-// // );
+// // // const Profile = ({ user, onUpdate }) => {
+// // //   const {
+// // //     control,
+// // //     handleSubmit,
+// // //     formState: { errors },
+// // //   } = useForm({ defaultValues: user });
+
+// // //   const [avatar, setAvatar] = useState("");
+
+// // //   // Load avatar from localStorage on mount
+// // //   useEffect(() => {
+// // //     const savedAvatar = localStorage.getItem("profile-avatar");
+// // //     if (savedAvatar) {
+// // //       setAvatar(savedAvatar);
+// // //     }
+// // //   }, []);
+
+// // //   // Save avatar to localStorage when updated
+// // //   useEffect(() => {
+// // //     if (avatar) {
+// // //       localStorage.setItem("profile-avatar", avatar);
+// // //     }
+// // //   }, [avatar]);
+
+// // //   const onSubmit = (data) => {
+// // //     toast.success("Profile updated successfully!");
+// // //     onUpdate({ ...data, avatar });
+// // //   };
+
+// // //   const handleAvatarChange = (e) => {
+// // //     const file = e.target.files[0];
+// // //     if (!file) return;
+
+// // //     const reader = new FileReader();
+
+// // //     reader.onload = (event) => {
+// // //       const imageDataUrl = event.target.result;
+
+// // //       const img = new Image();
+// // //       img.src = imageDataUrl;
+
+// // //       img.onload = () => {
+// // //         const { width, height } = img;
+
+// // //         if (width !== height) {
+// // //           toast.error("Please upload a square passport-size photo.");
+// // //           return;
+// // //         }
+
+// // //         if (width < 300 || width > 600) {
+// // //           toast.error("Image resolution must be between 300x600 pixels.");
+// // //           return;
+// // //         }
+
+// // //         if (file.size > 200 * 1024) {
+// // //           toast.error("Image size should not exceed 200KB.");
+// // //           return;
+// // //         }
+
+// // //         // ✅ All validations passed
+// // //         setAvatar(imageDataUrl);
+// // //         toast.success("Avatar uploaded successfully!");
+// // //       };
+
+// // //       img.onerror = () => {
+// // //         toast.error("Invalid image file.");
+// // //       };
+// // //     };
+
+// // //     reader.readAsDataURL(file);
+// // //   };
+
+// // //   return (
+// // //     <Card sx={{ maxWidth: 500, mx: "auto", mt: 5, p: 3, boxShadow: 3 }}>
+// // //       <CardContent>
+// // //         <Typography variant="h5" align="center" gutterBottom>
+// // //           Edit Profile
+// // //         </Typography>
+
+// // //         {/* Avatar Preview */}
+// // //         <Box display="flex" justifyContent="center" mb={2}>
+// // //           {avatar ? (
+// // //             <>
+// // //               <Avatar
+// // //                 src={avatar}
+// // //                 alt="Profile Preview"
+// // //                 sx={{ width: 100, height: 100, border: "2px solid #ccc" }}
+// // //               />
+// // //               {/* Optional: Debug preview */}
+// // //               <img
+// // //                 src={avatar}
+// // //                 alt="Image Preview"
+// // //                 style={{
+// // //                   width: 100,
+// // //                   height: 100,
+// // //                   border: "1px solid red",
+// // //                   marginLeft: 10,
+// // //                 }}
+// // //               />
+// // //             </>
+// // //           ) : (
+// // //             <Avatar sx={{ width: 100, height: 100, border: "2px solid #ccc" }}>
+// // //               {user?.name?.[0] || "U"}
+// // //             </Avatar>
+// // //           )}
+// // //         </Box>
+
+// // //         {/* Upload button */}
+// // //         {/* <Box mb={2} textAlign="center">
+// // //           <Button variant="outlined" component="label">
+// // //             Upload Avatar
+// // //             <input
+// // //               type="file"
+// // //               hidden
+// // //               accept="image/png, image/jpeg"
+// // //               onChange={handleAvatarChange}
+// // //             />
+// // //           </Button>
+// // //         </Box> */}
+
+// // //         {/* Profile Form */}
+// // //         <form onSubmit={handleSubmit(onSubmit)} noValidate>
+// // //           <Grid container spacing={2}>
+// // //             <Grid item xs={12}>
+// // //               <Controller
+// // //                 name="name"
+// // //                 control={control}
+// // //                 rules={{ required: "Name is required" }}
+// // //                 render={({ field }) => (
+// // //                   <TextField
+// // //                     {...field}
+// // //                     label="Name"
+// // //                     fullWidth
+// // //                     error={!!errors.name}
+// // //                     helperText={errors.name?.message}
+// // //                   />
+// // //                 )}
+// // //               />
+// // //             </Grid>
+
+// // //             <Grid item xs={12}>
+// // //               <Controller
+// // //                 name="email"
+// // //                 control={control}
+// // //                 render={({ field }) => (
+// // //                   <TextField {...field} label="Email" fullWidth disabled />
+// // //                 )}
+// // //               />
+// // //             </Grid>
+
+// // //             <Grid item xs={12}>
+// // //               <Controller
+// // //                 name="role"
+// // //                 control={control}
+// // //                 render={({ field }) => (
+// // //                   <TextField {...field} label="Role" fullWidth disabled />
+// // //                 )}
+// // //               />
+// // //             </Grid>
+
+// // //             <Grid item xs={12}>
+// // //               <Button
+// // //                 type="submit"
+// // //                 variant="contained"
+// // //                 color="primary"
+// // //                 fullWidth
+// // //               >
+// // //                 Update Profile
+// // //               </Button>
+// // //             </Grid>
+// // //           </Grid>
+// // //         </form>
+// // //       </CardContent>
+// // //     </Card>
+// // //   );
+// // // };
+
+// // // export default Profile;
+// // import { useState, useEffect } from "react";
+// // import { useForm, Controller } from "react-hook-form";
+// // import {
+// //   Card,
+// //   CardContent,
+// //   Typography,
+// //   TextField,
+// //   Button,
+// //   Avatar,
+// //   Grid,
+// //   Box,
+// // } from "@mui/material";
+// // import { toast } from "react-hot-toast";
 
 // // const Profile = ({ user, onUpdate }) => {
-// //   const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: user });
-// //   const [avatar, setAvatar] = useState(user.avatar || "");
+// //   const {
+// //     control,
+// //     handleSubmit,
+// //     formState: { errors },
+// //   } = useForm({ defaultValues: user });
+
+// //   const [avatar, setAvatar] = useState("");
+
+// //   // Load avatar from localStorage on mount
+// //   useEffect(() => {
+// //     const savedAvatar = localStorage.getItem("profile-avatar");
+// //     if (savedAvatar) {
+// //       setAvatar(savedAvatar);
+// //     }
+// //   }, []);
+
+// //   // Save avatar to localStorage when updated
+// //   useEffect(() => {
+// //     if (avatar) {
+// //       localStorage.setItem("profile-avatar", avatar);
+// //     }
+// //   }, [avatar]);
 
 // //   const onSubmit = (data) => {
 // //     toast.success("Profile updated successfully!");
@@ -36,55 +236,133 @@
 
 // //   const handleAvatarChange = (e) => {
 // //     const file = e.target.files[0];
-// //     if (file) {
-// //       const reader = new FileReader();
-// //       reader.onloadend = () => setAvatar(reader.result);
-// //       reader.readAsDataURL(file);
-// //     }
+// //     if (!file) return;
+
+// //     const reader = new FileReader();
+
+// //     reader.onload = (event) => {
+// //       const imageDataUrl = event.target.result;
+
+// //       const img = new Image();
+// //       img.src = imageDataUrl;
+
+// //       img.onload = () => {
+// //         const { width, height } = img;
+
+// //         if (width !== height) {
+// //           toast.error("Please upload a square passport-size photo.");
+// //           return;
+// //         }
+
+// //         if (width < 300 || width > 600) {
+// //           toast.error("Image resolution must be between 300x600 pixels.");
+// //           return;
+// //         }
+
+// //         if (file.size > 200 * 1024) {
+// //           toast.error("Image size should not exceed 200KB.");
+// //           return;
+// //         }
+
+// //         // ✅ All validations passed
+// //         setAvatar(imageDataUrl);
+// //         toast.success("Avatar uploaded successfully!");
+// //       };
+
+// //       img.onerror = () => {
+// //         toast.error("Invalid image file.");
+// //       };
+// //     };
+
+// //     reader.readAsDataURL(file);
 // //   };
 
 // //   return (
-// //     <Card className="max-w-lg mx-auto p-6 shadow-lg rounded-lg bg-white">
+// //     <Card sx={{ maxWidth: 500, mx: "auto", mt: 5, p: 3, boxShadow: 3 }}>
 // //       <CardContent>
-// //         {/* Avatar Section */}
-// //         <ProfileAvatar avatar={avatar} onAvatarChange={handleAvatarChange} userName={user.name} />
+// //         <Typography variant="h5" align="center" gutterBottom>
+// //           Edit Profile
+// //         </Typography>
+
+// //         {/* Avatar Preview */}
+// //         <Box display="flex" justifyContent="center" mb={2}>
+// //           {avatar ? (
+// //             <Avatar
+// //               src={avatar}
+// //               alt="Profile Preview"
+// //               sx={{ width: 100, height: 100, border: "2px solid #ccc" }}
+// //             />
+// //           ) : (
+// //             <Avatar sx={{ width: 100, height: 100, border: "2px solid #ccc" }}>
+// //               {user?.name?.[0] || "U"}
+// //             </Avatar>
+// //           )}
+// //         </Box>
+
+// //         {/* Avatar Upload Button */}
+// //         <Box mb={2} textAlign="center">
+// //           <Button variant="outlined" component="label">
+// //             Upload Avatar
+// //             <input
+// //               type="file"
+// //               hidden
+// //               accept="image/png, image/jpeg"
+// //               onChange={handleAvatarChange}
+// //             />
+// //           </Button>
+// //         </Box>
 
 // //         {/* Profile Form */}
-// //         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-4">
-// //           {/* Name */}
-// //           <FormInput
-// //             id="name"
-// //             label="Name"
-// //             register={register}
-// //             errors={errors}
-// //           />
+// //         <form onSubmit={handleSubmit(onSubmit)} noValidate>
+// //           <Grid container spacing={2}>
+// //             <Grid item xs={12}>
+// //               <Controller
+// //                 name="name"
+// //                 control={control}
+// //                 rules={{ required: "Name is required" }}
+// //                 render={({ field }) => (
+// //                   <TextField
+// //                     {...field}
+// //                     label="Name"
+// //                     fullWidth
+// //                     error={!!errors.name}
+// //                     helperText={errors.name?.message}
+// //                   />
+// //                 )}
+// //               />
+// //             </Grid>
 
-// //           {/* Email */}
-// //           <FormInput
-// //             id="email"
-// //             label="Email"
-// //             type="email"
-// //             register={register}
-// //             errors={errors}
-// //             disabled
-// //           />
+// //             <Grid item xs={12}>
+// //               <Controller
+// //                 name="email"
+// //                 control={control}
+// //                 render={({ field }) => (
+// //                   <TextField {...field} label="Email" fullWidth disabled />
+// //                 )}
+// //               />
+// //             </Grid>
 
-// //           {/* Role */}
-// //           <FormInput
-// //             id="role"
-// //             label="Role"
-// //             register={register}
-// //             errors={errors}
-// //             disabled
-// //           />
+// //             <Grid item xs={12}>
+// //               <Controller
+// //                 name="role"
+// //                 control={control}
+// //                 render={({ field }) => (
+// //                   <TextField {...field} label="Role" fullWidth disabled />
+// //                 )}
+// //               />
+// //             </Grid>
 
-// //           {/* Submit Button */}
-// //           <Button
-// //             type="submit"
-// //             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold p-3 rounded-md"
-// //           >
-// //             Update Profile
-// //           </Button>
+// //             <Grid item xs={12}>
+// //               <Button
+// //                 type="submit"
+// //                 variant="contained"
+// //                 color="primary"
+// //                 fullWidth
+// //               >
+// //                 Update Profile
+// //               </Button>
+// //             </Grid>
+// //           </Grid>
 // //         </form>
 // //       </CardContent>
 // //     </Card>
@@ -92,108 +370,98 @@
 // // };
 
 // // export default Profile;
-// import { useState } from "react";
-// import { useForm } from "react-hook-form";
-// import { Card, CardContent } from "../components/ui/card";
-// import { Button } from "../components/ui/button";
-// import { Input } from "../components/ui/input";
-// import { Label } from "../components/ui/label";
-// import ProfileAvatar from "../components/ProfileAvatar";
+// import { useState, useEffect } from "react";
+// import { Card, CardContent, Typography, TextField, Button, Avatar, Box, Grid } from "@mui/material";
 // import { toast } from "react-hot-toast";
-// import styles from "../style/Profile.module.css"; // Adjust the path accordingly
 
-// // Reusable Input component
-// const FormInput = ({ id, label, type = "text", register, errors, disabled }) => (
-//   <div>
-//     <Label htmlFor={id}>{label}</Label>
-//     <Input
-//       id={id}
-//       type={type}
-//       {...register(id, { required: `${label} is required` })}
-//       className={`w-full p-2 border ${errors[id] ? "border-red-500" : "border-gray-300"} rounded-md`}
-//       disabled={disabled}
-//     />
-//     {errors[id] && <p className="text-red-500 text-sm mt-1">{errors[id]?.message}</p>}
-//   </div>
-// );
+// const Profile = () => {
+//   const [user, setUser] = useState({ name: "", email: "" });
+//   const [avatar, setAvatar] = useState("");
 
-// const Profile = ({ user, onUpdate }) => {
-//   const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: user });
-//   const [avatar, setAvatar] = useState(user.avatar || "");
-
-//   const onSubmit = (data) => {
-//     toast.success("Profile updated successfully!");
-//     onUpdate({ ...data, avatar });
-//   };
+//   // Load user data from localStorage
+//   useEffect(() => {
+//     const storedUser = JSON.parse(localStorage.getItem("user"));
+//     if (storedUser) {
+//       setUser(storedUser); // Set user data from localStorage
+//     }
+//   }, []);
 
 //   const handleAvatarChange = (e) => {
 //     const file = e.target.files[0];
+//     if (!file) return;
 
-//     if (file) {
-//       const img = new Image();
-//       const reader = new FileReader();
+//     const reader = new FileReader();
 
-//       reader.onload = () => {
-//         img.src = reader.result;
-//       };
+//     reader.onload = (event) => {
+//       setAvatar(event.target.result);
+//       localStorage.setItem("profile-avatar", event.target.result); // Store avatar in localStorage
+//       toast.success("Avatar updated!");
+//     };
 
-//       img.onload = () => {
-//         const { width, height } = img;
+//     reader.readAsDataURL(file);
+//   };
 
-//         // Ensure it's a square image (1:1 aspect ratio)
-//         if (width !== height) {
-//           toast.error("Please upload a square passport-size photo.");
-//           return;
-//         }
-
-//         // Restrict resolution (300x600 pixels)
-//         if (width < 300 || width > 600) {
-//           toast.error("Image resolution must be between 300x600 pixels.");
-//           return;
-//         }
-
-//         // Restrict file size (max 200KB)
-//         if (file.size > 200 * 1024) {
-//           toast.error("Image size should not exceed 200KB.");
-//           return;
-//         }
-
-//         setAvatar(reader.result);
-//       };
-
-//       reader.readAsDataURL(file);
-//     }
+//   const onSubmit = () => {
+//     toast.success("Profile updated successfully!");
 //   };
 
 //   return (
-//     <Card className="max-w-lg mx-auto p-6 shadow-lg rounded-lg bg-white">
+//     <Card sx={{ maxWidth: 500, mx: "auto", mt: 5, p: 3, boxShadow: 3 }}>
 //       <CardContent>
-//         {/* Avatar Section */}
-//         <ProfileAvatar avatar={avatar} onAvatarChange={handleAvatarChange} userName={user.name} />
+//         <Typography variant="h5" align="center" gutterBottom>
+//           Edit Profile
+//         </Typography>
 
-//         {/* File Input for Avatar */}
-//         <input
-//           type="file"
-//           accept="image/png, image/jpeg"
-//           onChange={handleAvatarChange}
-//           className="mt-4"
-//         />
+//         {/* Avatar Section */}
+//         <Box display="flex" justifyContent="center" mb={2}>
+//           <Avatar
+//             src={avatar}
+//             alt="Profile Avatar"
+//             sx={{ width: 100, height: 100, border: "2px solid #ccc" }}
+//           >
+//             {user?.name?.[0] || "U"}
+//           </Avatar>
+//         </Box>
+
+//         <Box mb={2} textAlign="center">
+//           <Button variant="outlined" component="label">
+//             Upload Avatar
+//             <input
+//               type="file"
+//               hidden
+//               accept="image/png, image/jpeg"
+//               onChange={handleAvatarChange}
+//             />
+//           </Button>
+//         </Box>
 
 //         {/* Profile Form */}
-//         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-4">
-//           {/* Name */}
-//           <FormInput id="name" label="Name" register={register} errors={errors} />
+//         <form onSubmit={onSubmit} noValidate>
+//           <Grid container spacing={2}>
+//             <Grid item xs={12}>
+//               <TextField
+//                 label="Name"
+//                 fullWidth
+//                 value={user.name}
+//                 disabled
+//               />
+//             </Grid>
 
-//           {/* Email */}
-//           <FormInput id="email" label="Email" type="email" register={register} errors={errors} disabled />
+//             <Grid item xs={12}>
+//               <TextField
+//                 label="Email"
+//                 fullWidth
+//                 value={user.email}
+//                 disabled
+//               />
+//             </Grid>
 
-//           {/* Role */}
-//           <FormInput id="role" label="Role" register={register} errors={errors} disabled />
-
-//           {/* Submit Button */}
-//           <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold p-3 rounded-md">
-//             Update Profile
-//           </Button>
+//             <Grid item xs={12}>
+//               <Button type="submit" variant="contained" color="primary" fullWidth>
+//                 Update Profile
+//               </Button>
+//             </Grid>
+//           </Grid>
 //         </form>
 //       </CardContent>
 //     </Card>
@@ -201,110 +469,113 @@
 // };
 
 // export default Profile;
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Card, CardContent } from "../components/ui/card";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
+import { useState, useEffect } from "react";
+import { Card, CardContent, Typography, TextField, Button, Avatar, Box, Grid } from "@mui/material";
 import { toast } from "react-hot-toast";
-import styles from "../style/Profile.module.css"; // Adjust the path accordingly
 
-// Reusable Input component
-const FormInput = ({ id, label, type = "text", register, errors, disabled }) => (
-  <div>
-    <Label htmlFor={id}>{label}</Label>
-    <Input
-      id={id}
-      type={type}
-      {...register(id, { required: `${label} is required` })}
-      className={`w-full p-2 border ${errors[id] ? "border-red-500" : "border-gray-300"} rounded-md`}
-      disabled={disabled}
-    />
-    {errors[id] && <p className="text-red-500 text-sm mt-1">{errors[id]?.message}</p>}
-  </div>
-);
+const Profile = () => {
+  const [user, setUser] = useState({ name: "", email: "", role: "User" });
+  const [avatar, setAvatar] = useState("");
 
-const Profile = ({ user, onUpdate }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: user });
-  const [avatar, setAvatar] = useState(user.avatar || "");
+  // Load user data from localStorage
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedAvatar = localStorage.getItem("profile-avatar");
 
-  const onSubmit = (data) => {
-    toast.success("Profile updated successfully!");
-    onUpdate({ ...data, avatar });
-  };
+    if (storedUser) {
+      setUser(storedUser); // Set user data from localStorage
+    }
+    if (storedAvatar) {
+      setAvatar(storedAvatar); // Set avatar from localStorage if available
+    }
+  }, []);
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
+    if (!file) return;
 
-    if (file) {
-      const img = new Image();
-      const reader = new FileReader();
+    const reader = new FileReader();
 
-      reader.onload = () => {
-        img.src = reader.result;
-        setAvatar(reader.result); // Show image in UI immediately
-      };
+    reader.onload = (event) => {
+      setAvatar(event.target.result);
+      localStorage.setItem("profile-avatar", event.target.result); // Store avatar in localStorage
+      toast.success("Avatar updated!");
+    };
 
-      img.onload = () => {
-        const { width, height } = img;
+    reader.readAsDataURL(file);
+  };
 
-        // Ensure it's a square image (1:1 aspect ratio)
-        if (width !== height) {
-          toast.error("Please upload a square passport-size photo.");
-          return;
-        }
-
-        // Restrict resolution (300x600 pixels)
-        if (width < 300 || width > 600) {
-          toast.error("Image resolution must be between 300x600 pixels.");
-          return;
-        }
-
-        // Restrict file size (max 200KB)
-        if (file.size > 200 * 1024) {
-          toast.error("Image size should not exceed 200KB.");
-          return;
-        }
-      };
-
-      reader.readAsDataURL(file);
-    }
+  const onSubmit = (e) => {
+    e.preventDefault();
+    toast.success("Profile updated successfully!");
   };
 
   return (
-    <Card className="max-w-lg mx-auto p-6 shadow-lg rounded-lg bg-white">
+    <Card sx={{ maxWidth: 500, mx: "auto", mt: 5, p: 3, boxShadow: 3 }}>
       <CardContent>
-        {/* Avatar Preview */}
-        {avatar && (
-          <div className="flex justify-center mb-4">
-            <img src={avatar} alt="Profile Preview" className="w-36 h-36 rounded-full border-2 border-gray-300 shadow-md" />
-          </div>
-        )}
+        <Typography variant="h5" align="center" gutterBottom>
+          Edit Profile
+        </Typography>
 
-        {/* File Input for Avatar */}
-        <input
-          type="file"
-          accept="image/png, image/jpeg"
-          onChange={handleAvatarChange}
-          className="mt-4"
-        />
+        {/* Avatar Section */}
+        <Box display="flex" justifyContent="center" mb={2}>
+          <Avatar
+            src={avatar}
+            alt="Profile Avatar"
+            sx={{ width: 100, height: 100, border: "2px solid #ccc" }}
+          >
+            {user?.name?.[0] || "U"}
+          </Avatar>
+        </Box>
+
+        <Box mb={2} textAlign="center">
+          <Button variant="outlined" component="label">
+            Upload Avatar
+            <input
+              type="file"
+              hidden
+              accept="image/png, image/jpeg"
+              onChange={handleAvatarChange}
+            />
+          </Button>
+        </Box>
 
         {/* Profile Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-4">
-          {/* Name */}
-          <FormInput id="name" label="Name" register={register} errors={errors} />
+        <form onSubmit={onSubmit} noValidate>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                label="Name"
+                fullWidth
+                value={user.name}
+                disabled
+              />
+            </Grid>
 
-          {/* Email */}
-          <FormInput id="email" label="Email" type="email" register={register} errors={errors} disabled />
+            <Grid item xs={12}>
+              <TextField
+                label="Email"
+                fullWidth
+                value={user.email}
+                disabled
+              />
+            </Grid>
 
-          {/* Role */}
-          <FormInput id="role" label="Role" register={register} errors={errors} disabled />
+            <Grid item xs={12}>
+              <TextField
+                label="Role"
+                fullWidth
+                value={user.role} // Display role
+                disabled
+              />
+            </Grid>
 
-          {/* Submit Button */}
-          <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold p-3 rounded-md">
-            Update Profile
-          </Button>
+            <Grid item xs={12}>
+              <Button type="submit" variant="contained" color="primary" fullWidth>
+                Update Profile
+              </Button>
+            </Grid>
+          </Grid>
         </form>
       </CardContent>
     </Card>
