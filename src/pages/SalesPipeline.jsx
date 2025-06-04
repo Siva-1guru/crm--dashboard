@@ -1,246 +1,182 @@
- 
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import {
-  Card,
-  CardContent,
+  Box,
   Typography,
-  Grid,
-  Paper,
   Button,
   Dialog,
   DialogTitle,
   DialogContent,
-  TextField,
   DialogActions,
-  Box,
-  IconButton
+  TextField,
+  Grid,
+  Card,
+  CardContent,
+  IconButton,
+  MenuItem,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { v4 as uuidv4 } from "uuid";
-import { pipelineData } from "./salesData"; // Make sure this is structured correctly
+import axios from "axios";
+
+const stagesList = ["proposal", "qualified", "won","lose"];
 
 const SalesPipeline = () => {
-  const [stages, setStages] = useState(pipelineData.stages);
+  const [products, setProducts] = useState([]);
+  const [deals, setDeals] = useState([]);
   const [open, setOpen] = useState(false);
   const [newDeal, setNewDeal] = useState({
     name: "",
     value: "",
-    stage: Object.keys(pipelineData.stages)[0] || "", // defaults to "prospect"
+    stage: "prospect",
+    product: "",
   });
 
-  const handleDragEnd = ({ source, destination }) => {
-    if (!destination) return;
-
-    const sourceStage = stages[source.droppableId];
-    const destStage = stages[destination.droppableId];
-    const draggedDeal = sourceStage.deals[source.index];
-
-    const updatedStages = {
-      ...stages,
-      [source.droppableId]: {
-        ...sourceStage,
-        deals: sourceStage.deals.filter((_, idx) => idx !== source.index),
-      },
-      [destination.droppableId]: {
-        ...destStage,
-        deals: [
-          ...destStage.deals.slice(0, destination.index),
-          draggedDeal,
-          ...destStage.deals.slice(destination.index),
-        ],
-      },
-    };
-
-    setStages(updatedStages);
+  const fetchProducts = async () => {
+    const res = await axios.get("http://localhost:5000/api/products");
+    setProducts(res.data);
   };
 
-  const handleAddDeal = () => {
-    console.log("Adding deal to stage:", newDeal.stage);
-    console.log("All available stages:", Object.keys(stages));
+  const fetchDeals = async () => {
+    const res = await axios.get("http://localhost:5000/api/deals");
+    setDeals(res.data);
+  };
 
-    if (!newDeal.name.trim() || !newDeal.value) return;
+  useEffect(() => {
+    fetchProducts();
+    fetchDeals();
+  }, []);
 
-    if (!stages[newDeal.stage]) {
-      console.error("Invalid stage selected:", newDeal.stage);
-      return;
-    }
+  const groupedDeals = stagesList.reduce((acc, stage) => {
+    acc[stage] = deals.filter((deal) => deal.stage === stage);
+    return acc;
+  }, {});
 
-    const deal = {
-      id: uuidv4(),
-      name: newDeal.name,
+  const handleAddDeal = async () => {
+    if (!newDeal.name || !newDeal.value || !newDeal.product) return;
+    const payload = {
+      ...newDeal,
       value: parseFloat(newDeal.value),
       date: new Date().toLocaleDateString(),
     };
-
-    const updatedStages = {
-      ...stages,
-      [newDeal.stage]: {
-        ...stages[newDeal.stage],
-        deals: [...stages[newDeal.stage].deals, deal],
-      },
-    };
-
-    setStages(updatedStages);
-    setNewDeal({
-      name: "",
-      value: "",
-      stage: Object.keys(stages)[0],
-    });
+    await axios.post("http://localhost:5000/api/deals", payload);
+    fetchDeals();
+    setNewDeal({ name: "", value: "", stage: "prospect", product: "" });
     setOpen(false);
   };
 
-  const handleDeleteDeal = (stageId, dealId) => {
-    const updatedDeals = stages[stageId].deals.filter((d) => d.id !== dealId);
+  const handleDelete = async (id) => {
+    await axios.delete(`http://localhost:5000/api/deals/${id}`);
+    fetchDeals();
+  };
 
-    setStages({
-      ...stages,
-      [stageId]: {
-        ...stages[stageId],
-        deals: updatedDeals,
-      },
+  const handleDragEnd = async ({ source, destination }) => {
+    if (!destination) return;
+    const moved = groupedDeals[source.droppableId][source.index];
+    await axios.put(`http://localhost:5000/api/deals/${moved._id}`, {
+      ...moved,
+      stage: destination.droppableId,
     });
+    fetchDeals();
   };
 
   return (
-    <>
-      <Box display="flex" justifyContent="space-between" mb={2}>
-        <Typography variant="h4">Sales Pipeline</Typography>
-        <Button variant="contained" onClick={() => setOpen(true)}>
-          + Add Deal
-        </Button>
-      </Box>
+    <Box sx={{ p: 2 }}>
+      <Typography variant="h4" gutterBottom>Sales Pipeline</Typography>
+      <Button variant="contained" onClick={() => setOpen(true)}>Add Deal</Button>
 
-      {/* Add Deal Dialog */}
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Add New Deal</DialogTitle>
         <DialogContent>
           <TextField
-            fullWidth
-            label="Deal Name"
-            margin="dense"
+            fullWidth margin="dense" label="Deal Name"
             value={newDeal.name}
-            onChange={(e) =>
-              setNewDeal({ ...newDeal, name: e.target.value })
-            }
+            onChange={(e) => setNewDeal({ ...newDeal, name: e.target.value })}
           />
           <TextField
-            fullWidth
-            label="Deal Value"
-            margin="dense"
-            type="number"
+            fullWidth margin="dense" label="Value" type="number"
             value={newDeal.value}
-            onChange={(e) =>
-              setNewDeal({ ...newDeal, value: e.target.value })
-            }
+            onChange={(e) => setNewDeal({ ...newDeal, value: e.target.value })}
           />
           <TextField
-            fullWidth
-            select
-            label="Stage"
-            margin="dense"
-            SelectProps={{ native: true }}
-            value={newDeal.stage}
-            onChange={(e) =>
-              setNewDeal({ ...newDeal, stage: e.target.value })
-            }
+            fullWidth select label="Product" margin="dense"
+            value={newDeal.product}
+            onChange={(e) => setNewDeal({ ...newDeal, product: e.target.value })}
           >
-            {Object.entries(stages).map(([key, value]) => (
-              <option key={key} value={key}>
-                {value.title}
-              </option>
+            {products.map((prod) => (
+              <MenuItem key={prod._id} value={prod._id}>
+                {prod.title}
+              </MenuItem>
+            ))}
+          </TextField>
+          <TextField
+            fullWidth select label="Stage" margin="dense"
+            value={newDeal.stage}
+            onChange={(e) => setNewDeal({ ...newDeal, stage: e.target.value })}
+          >
+            {stagesList.map((stage) => (
+              <MenuItem key={stage} value={stage}>
+                {stage.charAt(0).toUpperCase() + stage.slice(1)}
+              </MenuItem>
             ))}
           </TextField>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)}>Cancel</Button>
-          <Button onClick={handleAddDeal} variant="contained">
-            Add
-          </Button>
+          <Button onClick={handleAddDeal}>Add</Button>
         </DialogActions>
       </Dialog>
 
-      {/* Drag & Drop Columns */}
       <DragDropContext onDragEnd={handleDragEnd}>
-        <Grid container spacing={2}>
-          {Object.entries(stages).map(([stageId, stage]) => (
+        <Grid container spacing={2} sx={{ mt: 2 }}>
+          {stagesList.map((stageId) => (
             <Grid item xs={12} sm={6} md={3} key={stageId}>
-              <Typography variant="h6" align="center" sx={{ mb: 1 }}>
-                {stage.title} ({stage.deals.length})
+              <Typography variant="h6" gutterBottom>
+                {stageId.toUpperCase()}
               </Typography>
               <Droppable droppableId={stageId}>
                 {(provided) => (
-                  <Paper
+                  <Box
                     ref={provided.innerRef}
                     {...provided.droppableProps}
                     sx={{
                       minHeight: 300,
-                      padding: 1.5,
+                      background: "#f5f5f5",
+                      p: 1,
                       borderRadius: 2,
-                      backgroundColor: "#f5f5f5",
                     }}
                   >
-                    {stage.deals.length === 0 ? (
-                      <Typography align="center" color="text.secondary">
-                        No deals yet
-                      </Typography>
-                    ) : (
-                      stage.deals.map((deal, index) => (
-                        <Draggable
-                          key={deal.id}
-                          draggableId={deal.id}
-                          index={index}
-                        >
-                          {(provided) => (
-                            <Card
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              sx={{
-                                mb: 1.5,
-                                boxShadow: 2,
-                                ...provided.draggableProps.style,
-                              }}
-                            >
-                              <CardContent>
-                                <Box
-                                  display="flex"
-                                  justifyContent="space-between"
-                                  alignItems="center"
-                                >
-                                  <Typography fontWeight="bold">
-                                    {deal.name}
-                                  </Typography>
-                                  <IconButton
-                                    size="small"
-                                    onClick={() =>
-                                      handleDeleteDeal(stageId, deal.id)
-                                    }
-                                  >
-                                    <DeleteIcon fontSize="small" />
-                                  </IconButton>
-                                </Box>
-                                <Typography variant="body2">
-                                  Value: ${deal.value}
-                                </Typography>
-                                <Typography variant="caption" color="text.secondary">
-                                  Added: {deal.date}
-                                </Typography>
-                              </CardContent>
-                            </Card>
-                          )}
-                        </Draggable>
-                      ))
-                    )}
+                    {groupedDeals[stageId].map((deal, index) => (
+                      <Draggable key={deal._id} draggableId={deal._id} index={index}>
+                        {(provided) => (
+                          <Card
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            sx={{ mb: 1 }}
+                          >
+                            <CardContent>
+                              <Typography variant="subtitle1">{deal.name}</Typography>
+                              <Typography variant="body2">₹{deal.value}</Typography>
+                              <Typography variant="body2">{deal.product?.title}</Typography>
+                              <Typography variant="caption">{deal.date}</Typography>
+                              <IconButton onClick={() => handleDelete(deal._id)}>
+                                <DeleteIcon />
+                              </IconButton>
+                            </CardContent>
+                          </Card>
+                        )}
+                      </Draggable>
+                    ))}
                     {provided.placeholder}
-                  </Paper>
+                  </Box>
                 )}
               </Droppable>
             </Grid>
           ))}
         </Grid>
       </DragDropContext>
-    </>
+    </Box>
   );
 };
 

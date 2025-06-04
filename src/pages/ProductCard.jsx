@@ -23,7 +23,7 @@ const ProductCard = ({ product, onAddToCart, onView }) => (
       </Box>
     </CardContent>
     <CardActions>
-      <Button size="small" variant="outlined" onClick={() => onAddToCart(product)}>Add to Cart</Button>
+      {/* <Button size="small" variant="outlined" onClick={() => onAddToCart(product)}>Add to Cart</Button> */}
       <Button size="small" variant="contained" onClick={() => onView(product)}>View</Button>
     </CardActions>
   </Card>

@@ -555,10 +555,10 @@ const drawerWidth = 240;
 
 const modules = [
   { name: 'Dashboard', path: '/dashboard', icon: <DashboardIcon /> },
-  { name: 'Profile', path: '/profile', icon: <PersonIcon /> },
+  // { name: 'Profile', path: '/profile', icon: <PersonIcon /> },
   { name: 'Leads', path: '/leads', icon: <LeaderboardIcon /> },
   { name: 'Contacts', path: '/contacts', icon: <ContactsIcon /> },
-  { name: 'Reports', path: '/reports', icon: <ReportIcon /> },
+  // { name: 'Reports', path: '/reports', icon: <ReportIcon /> },
   { name: 'Sales', path: '/sales', icon: <ShoppingCartIcon /> },
   { name: 'Tasks', path: '/tasks', icon: <TaskIcon /> },
   { name: 'Deals', path: '/deals', icon: <WorkIcon /> },
@@ -667,18 +667,30 @@ const Sidebar = () => {
       </AppBar>
 
       <Drawer
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{ keepMounted: true }}
-        sx={{
-          display: { xs: 'block', sm: 'block' },
-          '& .MuiDrawer-paper': {
-            width: isMobile ? '100%' : drawerWidth,
-            maxWidth: '100%',
-          },
-        }}
-      >
+      //   variant="temporary"
+      //   open={mobileOpen}
+      //   onClose={handleDrawerToggle}
+      //   ModalProps={{ keepMounted: true }}
+      //   sx={{
+      //     display: { xs: 'block', sm: 'block' },
+      //     '& .MuiDrawer-paper': {
+      //       width: isMobile ? '100%' : drawerWidth,
+      //       maxWidth: '100%',
+      //     },
+      //   }}
+      // >
+       variant={isMobile ? 'temporary' : 'permanent'}
+  open={isMobile ? mobileOpen : true}
+  onClose={handleDrawerToggle}
+  ModalProps={{ keepMounted: true }}
+  sx={{
+    display: { xs: 'block', sm: 'block' },
+    '& .MuiDrawer-paper': {
+      width: drawerWidth,
+      boxSizing: 'border-box',
+    },
+  }}
+>
         {drawer}
       </Drawer>
 
@@ -688,6 +700,7 @@ const Sidebar = () => {
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
+          ml: { sm: `${drawerWidth}px` }, // Adjust margin for main content
         }}
       >
         <Toolbar />
